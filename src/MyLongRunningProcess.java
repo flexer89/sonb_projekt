@@ -247,9 +247,9 @@ public synchronized int getSuccessfulCount(int threadId) {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            // threads[threadId] = new MyLongRunningProcess(threadId, new Thread(), 0, GUI.this);
-            // threads[threadId].setFibonacciRange(Integer.parseInt(startRanges[threadId].getText()), Integer.parseInt(endRanges[threadId].getText()));
-            // new Thread(threads[threadId]).start();
+            threads[threadId] = new MyLongRunningProcess(threadId, new Thread(), 0, 0, GUI.this);
+            threads[threadId].setFibonacciRange(Integer.parseInt(startRanges[threadId].getText()), Integer.parseInt(endRanges[threadId].getText()));
+            new Thread(threads[threadId]).start();
         }
     }
 
