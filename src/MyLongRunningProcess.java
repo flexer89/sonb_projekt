@@ -26,6 +26,11 @@ public class MyLongRunningProcess implements Runnable {
         recursiveWork();
     }
 
+    public void setRestartCount(int count) {
+        restartCount = count;
+    }
+    
+
     private void recursiveWork() {
         while (running && !shutdownEvent.isInterrupted()) {
             running = true;
@@ -42,7 +47,7 @@ public class MyLongRunningProcess implements Runnable {
 
             int index = (int) (Math.random() * (fibonacciRangeEnd - fibonacciRangeStart + 1)) + fibonacciRangeStart;
             gui.printToConsole("Thread " + threadId + ": Calculating fibonacci(" + index + ")");
-            int result = fibonacci(index);
+            long result = fibonacci(index);
             gui.printToConsole("Thread " + threadId + ": Result(" + index + ") = " + result);
             try {
                 Thread.sleep(1000);
@@ -71,7 +76,7 @@ public class MyLongRunningProcess implements Runnable {
         return lastProgressTime.get();
     }
 
-    private int fibonacci(int n) {
+    private long fibonacci(long n) {
         if (n <= 1) {
             return n;
         } else {

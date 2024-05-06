@@ -30,6 +30,7 @@ class GUI extends JFrame {
         return endRanges;
     }
 
+
 public synchronized int getSuccessfulCount(int threadId) {
     return threads[threadId].successfulCalculations;
 }

@@ -6,6 +6,7 @@ public class WatchdogThread extends Thread {
     public WatchdogThread(MyLongRunningProcess[] threads, long timeoutMillis, GUI gui) {
         this.threads = threads;
         this.timeoutMillis = timeoutMillis;
+        this.gui = gui;
     }
 
     @Override
@@ -13,14 +14,13 @@ public class WatchdogThread extends Thread {
         while (true) {
             long currentTime = System.currentTimeMillis();
             for (MyLongRunningProcess thread : threads) {
-                System.out.println(thread.getLastProgressTime());
                 if (thread != null && currentTime - thread.getLastProgressTime() > timeoutMillis && thread.isRunning()) {
-                    if (gui != null) {
-                        gui.printToConsole("Thread " + thread.getThreadId() + " is stuck. Restarting...");
-                        thread.stop();
-                        thread.start();
-                        gui.updateRestartCounter(Integer.parseInt(thread.getThreadId()), thread.getRestartCount());
-                    }
+                    gui.printToConsole("Thread " + thread.getThreadId() + " is stuck. Restarting...");
+                    thread.stop();
+                    thread.start();
+                    int restartCount = thread.getRestartCount();
+                    gui.updateRestartCounter(Integer.parseInt(thread.getThreadId()), restartCount + 1);
+                    thread.setRestartCount(restartCount + 1);
                 }
             }
             try {
