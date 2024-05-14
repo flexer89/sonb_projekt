@@ -17,7 +17,7 @@ public class WatchdogThread extends Thread {
                 if (thread != null && currentTime - thread.getLastProgressTime() > timeoutMillis && thread.isRunning()) {
                     gui.printToConsole("Thread " + thread.getThreadId() + " is stuck. Restarting...");
                     thread.stop();
-                    thread.start();
+                    thread.createNewThread();
                     int restartCount = thread.getRestartCount();
                     gui.updateRestartCounter(Integer.parseInt(thread.getThreadId()), restartCount + 1);
                     thread.setRestartCount(restartCount + 1);

@@ -97,7 +97,7 @@ public class MyLongRunningProcess implements Runnable {
         return running;
     }
 
-    public void start() {
+    public void createNewThread() {
         new Thread(this).start();
     }
 

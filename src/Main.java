@@ -15,7 +15,7 @@ public class Main {
 
         gui.setThreads(threads);
 
-        WatchdogThread watchdog = new WatchdogThread(threads, 1000, gui);
+        WatchdogThread watchdog = new WatchdogThread(threads, 7000, gui);
         watchdog.start();
     }
 }
